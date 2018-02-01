@@ -45,4 +45,15 @@ describe GMApiClient do
     expect(['True', 'False']).to include response['data']['doors']['values'].first['locked']['value']
   end
 
+  it 'gets vehicle fuel status' do
+    id = 1234
+    response = GMApiClient.get_fuel_and_battery_status(id)
+    expect(response['data']['tankLevel']['value']).to be_kind_of(String)
+  end
+
+  it 'gets vehicle battery status' do
+    id = 1235
+    response = GMApiClient.get_fuel_and_battery_status(id)
+    expect(response['data']['batteryLevel']['value']).to be_kind_of(String)
+  end
 end
