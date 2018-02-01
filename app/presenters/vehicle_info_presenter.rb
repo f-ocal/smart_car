@@ -16,10 +16,10 @@ class VehicleInfoPresenter
   def format_vehicle_security_info(vehicle_security_info)
     location_locked_info = vehicle_security_info['data']['doors']['values']
 
-    result = location_locked_info.map do |k|
+    result = location_locked_info.map do |location_locked|
       {
-        location:  k['location']['value'],
-        locked: k['locked']['value'] == 'True'
+        location: location_locked['location']['value'],
+        locked: location_locked['locked']['value'] == 'True'
       }
     end
 
@@ -39,6 +39,13 @@ class VehicleInfoPresenter
 
     {
       percent: battery_information.to_i
+    }
+  end
+
+  def format_start_engine_info(vehicle_engine_info)
+
+    {
+      status: vehicle_engine_info['actionResult']['status'] == 'EXECUTED' ? 'success' : 'error'
     }
   end
 end
