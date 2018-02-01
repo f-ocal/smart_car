@@ -23,4 +23,14 @@ describe 'vehicle api', type: :request do
     expect(JSON.parse(response.body).first['location']).to be_kind_of(String)
     expect(JSON.parse(response.body).first['locked']).to be_in([true, false])
   end
+
+  it 'requests vehicle fuel status' do
+    get '/vehicles/1234/fuel'
+    expect(JSON.parse(response.body)['percent']).to be_kind_of(Integer)
+  end
+
+  it 'requests vehicle battery status' do
+    get '/vehicles/1235/battery'
+    expect(JSON.parse(response.body)['percent']).to be_kind_of(Integer)
+  end
 end
