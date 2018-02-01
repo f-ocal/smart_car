@@ -28,4 +28,19 @@ class GMApiClient
 
     JSON.parse(response)
   end
+
+  def self.start_stop_engine(id, command)
+    if command == 'START'
+      action = "START_VEHICLE"
+    else
+      action = "STOP_VEHICLE"
+    end
+
+    response = post('/actionEngineService',
+                    body: { id: id, command: action, responseType: 'JSON' }.to_json,
+                    headers: { 'Content-Type' => 'application/json' }
+                   ).body
+
+    JSON.parse(response)
+  end
 end
