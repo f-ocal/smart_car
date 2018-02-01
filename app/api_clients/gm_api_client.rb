@@ -1,11 +1,23 @@
-  class GMApiClient
-    include HTTParty
-    base_uri 'http://gmapi.azurewebsites.net'
+class GMApiClient
+  include HTTParty
+  base_uri 'http://gmapi.azurewebsites.net'
 
-    def self.get_vehicle_info(id)
-      post('/getVehicleInfoService',
-           body: { id: id, responseType: 'JSON' }.to_json,
-           headers: { 'Content-Type' => 'application/json' }
-          ).body
-    end
+  def self.get_vehicle_info(id)
+    response = post('/getVehicleInfoService',
+                    body: { id: id, responseType: 'JSON' }.to_json,
+                    headers: { 'Content-Type' => 'application/json' }
+                   ).body
+
+    JSON.parse(response)
   end
+
+  def self.get_security_status(id)
+    response = post('/getSecurityStatusService',
+                    body: { id: id, responseType: 'JSON' }.to_json,
+                    headers: { 'Content-Type' => 'application/json' }
+                   ).body
+
+    JSON.parse(response)
+  end
+
+end
