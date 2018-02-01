@@ -56,4 +56,16 @@ describe GMApiClient do
     response = GMApiClient.get_fuel_and_battery_status(id)
     expect(response['data']['batteryLevel']['value']).to be_kind_of(String)
   end
+
+  it 'starts the vehicle engine' do
+    id = 1234
+    response = GMApiClient.start_stop_engine(id, "START")
+    expect(response['actionResult']['status']).to be_in(["EXECUTED", "FAILED"])
+  end
+
+  it 'stops the vehicle engine' do
+    id = 1234
+    response = GMApiClient.start_stop_engine(id, "STOP")
+    expect(response['actionResult']['status']).to be_in(["EXECUTED", "FAILED"])
+  end
 end
