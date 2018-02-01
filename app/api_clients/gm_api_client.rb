@@ -20,4 +20,12 @@ class GMApiClient
     JSON.parse(response)
   end
 
+  def self.get_fuel_and_battery_status(id)
+    response = post('/getEnergyService',
+                    body: { id: id, responseType: 'JSON' }.to_json,
+                    headers: { 'Content-Type' => 'application/json' }
+                   ).body
+
+    JSON.parse(response)
+  end
 end
