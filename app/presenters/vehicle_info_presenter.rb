@@ -14,15 +14,31 @@ class VehicleInfoPresenter
   end
 
   def format_vehicle_security_info(vehicle_security_info)
-    locationLockInfo = vehicle_security_info['data']['doors']['values']
+    location_locked_info = vehicle_security_info['data']['doors']['values']
 
-    result = locationLockInfo.map do |k|
+    result = location_locked_info.map do |k|
       {
         location:  k['location']['value'],
         locked: k['locked']['value'] == 'True'
       }
     end
-    
+
     result
+  end
+
+  def format_vehicle_fuel_info(vehicle_fuel_info)
+    fuel_information = vehicle_fuel_info['data']['tankLevel']['value']
+
+    {
+      percent: fuel_information.to_i
+    }
+  end
+
+  def format_vehicle_battery_info(vehicle_fuel_info)
+    battery_information = vehicle_fuel_info['data']['batteryLevel']['value']
+
+    {
+      percent: battery_information.to_i
+    }
   end
 end
