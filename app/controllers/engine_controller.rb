@@ -7,4 +7,8 @@ class EngineController < ApplicationController
       render json: {}, status: 400
     end
   end
+  
+  def index
+    render json: "No information found!"
+  end
 end
